@@ -153,9 +153,7 @@
       const statusCell = row.insertCell(1);
       const dateCell = row.insertCell(2);
 
-      const medName = req.medicationCodeableConcept?.text ||
-                      req.medicationReference?.display ||
-                      "Unknown";
+      const medName = req.medicationCodeableConcept?.text || req.medicationReference?.display || "Unknown";
 
       medCell.textContent = medName;
       statusCell.textContent = req.status || "N/A";
