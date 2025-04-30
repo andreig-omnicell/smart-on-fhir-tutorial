@@ -123,7 +123,7 @@ function displayMedAdministrations(api, patientId) {
     query: {
       patient: patientId
     }
-  }).then(function(meds) {
+  }).done(function(meds) {
     const table = document.getElementById("med-admin-table");
 
     meds.forEach(function(med) {
@@ -136,7 +136,7 @@ function displayMedAdministrations(api, patientId) {
       doseCell.textContent = med.dosage?.text || "N/A";
       timeCell.textContent = med.effectiveDateTime || "Unknown";
     });
-  }).catch(function(error) {
+  }).fail(function(error) {
     console.error("Failed to fetch MedicationAdministration data:", error);
   });
 }
@@ -147,7 +147,7 @@ function displayMedicationRequests(api, patientId) {
     query: {
       patient: patientId
     }
-  }).then(function(requests) {
+  }).done(function(requests) {
     console.log("MedicationRequest resources:", requests);
     const table = document.getElementById("med-request-table");
 
@@ -163,7 +163,7 @@ function displayMedicationRequests(api, patientId) {
       statusCell.textContent = req.status || "N/A";
       dateCell.textContent = req.authoredOn || "Unknown";
     });
-  }).catch(function(error) {
+  }).fail(function(error) {
     console.error("Failed to fetch MedicationRequest data:", error);
   });
 }
