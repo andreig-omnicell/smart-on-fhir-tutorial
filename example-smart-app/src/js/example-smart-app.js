@@ -118,9 +118,11 @@
   }
 
 function displayMedAdministrations(api, patientId) {
-  api.request("MedicationAdministration?patient=" + patientId, {
-    pageLimit: 0,
-    flat: true
+  api.fetchAll({
+    type: 'MedicationAdministration',
+    query: {
+      patient: patientId
+    }
   }).then(function(meds) {
     const table = document.getElementById("med-admin-table");
 
@@ -140,9 +142,11 @@ function displayMedAdministrations(api, patientId) {
 }
 
 function displayMedicationRequests(api, patientId) {
-  api.request("MedicationRequest?patient=" + patientId, {
-    pageLimit: 0,
-    flat: true
+  api.fetchAll({
+    type: 'MedicationRequest',
+    query: {
+      patient: patientId
+    }
   }).then(function(requests) {
     console.log("MedicationRequest resources:", requests);
     const table = document.getElementById("med-request-table");
