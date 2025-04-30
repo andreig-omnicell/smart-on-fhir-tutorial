@@ -114,6 +114,28 @@
     }
   }
 
+  function displayMedAdministrations(client) {
+  client.request("MedicationAdministration?patient=" + client.patient.id, {
+    pageLimit: 0,
+    flat: true
+  }).then(function(meds) {
+    const table = document.getElementById("med-admin-table");
+
+    meds.forEach(function(med) {
+      const row = table.insertRow(-1);
+      const medCell = row.insertCell(0);
+      const doseCell = row.insertCell(1);
+      const timeCell = row.insertCell(2);
+
+      medCell.textContent = med.medicationCodeableConcept?.text || "Unknown";
+      doseCell.textContent = med.dosage?.text || "N/A";
+      timeCell.textContent = med.effectiveDateTime || "Unknown";
+    });
+  }).catch(function(error) {
+    console.error("Failed to fetch MedicationAdministration data:", error);
+  });
+}
+
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
