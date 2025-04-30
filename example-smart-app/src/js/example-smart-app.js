@@ -61,6 +61,7 @@
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
           displayMedAdministrations(smart);
+          displayMedicationRequests(smart);
           
           ret.resolve(p);
         });
@@ -138,6 +139,34 @@
     console.error("Failed to fetch MedicationAdministration data:", error);
   });
 }
+
+  function displayMedicationRequests(client) {
+  client.request("MedicationRequest?patient=" + client.patient.id, {
+    pageLimit: 0,
+    flat: true
+  }).then(function(requests) {
+    console.log("MedicationRequest resources:", requests); // debug
+    const table = document.getElementById("med-request-table");
+
+    requests.forEach(function(req) {
+      const row = table.insertRow(-1);
+      const medCell = row.insertCell(0);
+      const statusCell = row.insertCell(1);
+      const dateCell = row.insertCell(2);
+
+      const medName = req.medicationCodeableConcept?.text ||
+                      req.medicationReference?.display ||
+                      "Unknown";
+
+      medCell.textContent = medName;
+      statusCell.textContent = req.status || "N/A";
+      dateCell.textContent = req.authoredOn || "Unknown";
+    });
+  }).catch(function(error) {
+    console.error("Failed to fetch MedicationRequest data:", error);
+  });
+}
+
 
   window.drawVisualization = function(p) {
     $('#holder').show();
