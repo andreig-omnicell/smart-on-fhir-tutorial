@@ -60,6 +60,8 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
+          displayMedAdministrations(smart);
+          
           ret.resolve(p);
         });
       } else {
