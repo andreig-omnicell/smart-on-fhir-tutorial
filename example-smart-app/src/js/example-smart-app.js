@@ -60,8 +60,8 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
-          displayMedAdministrations(smart.patient.api, smart.patient.id);
-          displayMedicationRequests(smart.patient.api, smart.patient.id);
+          displayMedAdministrations(smart.patient.api, patient.id);
+          displayMedicationRequests(smart.patient.api, patient.id);
           
           ret.resolve(p);
         });
