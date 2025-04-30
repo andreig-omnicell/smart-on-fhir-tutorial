@@ -130,7 +130,7 @@
       const timeCell = row.insertCell(2);
 
       medCell.textContent = med.medicationCodeableConcept?.text || 
-        med.medicationReference?.display ||"Unknown";
+        med.medicationReference?.display || "Unknown";
       doseCell.textContent = med.dosage?.text || "N/A";
       timeCell.textContent = med.effectiveDateTime || "Unknown";
     });
