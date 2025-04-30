@@ -60,8 +60,8 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
-          displayMedAdministrations(smart.patient.api);
-          displayMedicationRequests(smart.patient.api);
+          displayMedAdministrations(smart.patient.api, smart.patient.id);
+          displayMedicationRequests(smart.patient.api, smart.patient.id);
           
           ret.resolve(p);
         });
@@ -117,8 +117,8 @@
     }
   }
 
-  function displayMedAdministrations(client) {
-  client.request("MedicationAdministration?patient=" + client.patient.id, {
+function displayMedAdministrations(api, patientId) {
+  api.request("MedicationAdministration?patient=" + patientId, {
     pageLimit: 0,
     flat: true
   }).then(function(meds) {
@@ -139,12 +139,12 @@
   });
 }
 
-  function displayMedicationRequests(client) {
-  client.request("MedicationRequest?patient=" + client.patient.id, {
+function displayMedicationRequests(api, patientId) {
+  api.request("MedicationRequest?patient=" + patientId, {
     pageLimit: 0,
     flat: true
   }).then(function(requests) {
-    console.log("MedicationRequest resources:", requests); // debug
+    console.log("MedicationRequest resources:", requests);
     const table = document.getElementById("med-request-table");
 
     requests.forEach(function(req) {
@@ -163,7 +163,6 @@
     console.error("Failed to fetch MedicationRequest data:", error);
   });
 }
-
 
   window.drawVisualization = function(p) {
     $('#holder').show();
