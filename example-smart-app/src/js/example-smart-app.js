@@ -148,9 +148,9 @@ function displayMedAdministrations(api, patientId) {
     pre.style.padding = "1em";
     pre.style.marginTop = "2em";
     pre.textContent = JSON.stringify(meds, null, 2);
-    //document.body.appendChild(pre);
+    document.body.appendChild(pre);
     //document.getElementById("med-admin-json").appendChild(pre);
-    document.getElementById("med-admin-json").textContent = JSON.stringify(meds, null, 2);
+    //document.getElementById("med-admin-json").textContent = JSON.stringify(meds, null, 2);
     
   }).fail(function(error) {
     console.error("Failed to fetch MedicationAdministration data:", error);
