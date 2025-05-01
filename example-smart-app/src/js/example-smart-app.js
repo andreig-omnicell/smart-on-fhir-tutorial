@@ -130,10 +130,12 @@ function displayMedAdministrations(api, patientId) {
       const row = table.insertRow(-1);
       const medCell = row.insertCell(0);
       const doseCell = row.insertCell(1);
+      const statusCell = row.insertCell(2);
       const timeCell = row.insertCell(2);
 
       medCell.textContent = med.medicationCodeableConcept?.text || med.medicationReference?.display || "Unknown";
       doseCell.textContent = med.dosage?.text || "N/A";
+      statusCell.textContent = med.status || "N/A";
       timeCell.textContent = med.effectiveDateTime || "Unknown";
     });
   }).fail(function(error) {
