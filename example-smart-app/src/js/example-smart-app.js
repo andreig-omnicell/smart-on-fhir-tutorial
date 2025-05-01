@@ -134,7 +134,7 @@ function displayMedAdministrations(api, patientId) {
       const timeCell = row.insertCell(3);
 
       medCell.textContent = med.medicationCodeableConcept?.text || med.medicationReference?.display || "Unknown";
-      doseCell.textContent = med.dosage?.text || "N/A";
+      doseCell.textContent = med.dosage?.quantity?.value || "N/A";
       statusCell.textContent = med.status || "N/A";
       timeCell.textContent = med.effectiveDateTime || "Unknown";
     });
