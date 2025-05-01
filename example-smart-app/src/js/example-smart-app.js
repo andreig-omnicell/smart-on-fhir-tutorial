@@ -134,14 +134,24 @@ function displayMedAdministrations(api, patientId) {
       const timeCell = row.insertCell(3);
 
       medCell.textContent = med.medicationCodeableConcept?.text || med.medicationReference?.display || "Unknown";
-      // doseCell.textContent = med.dosage?.quantity?.value || "N/A";
-      // doseCell.textContent = doseCell.textContent + " " + med.dosage?.quantity?.unit;
       const dosageValue = med.dosage?.quantity?.value ?? "N/A";
       const dosageUnit = med.dosage?.quantity?.unit ?? "";
       doseCell.textContent = `${dosageValue}${dosageUnit ? " " + dosageUnit : ""}`;
       statusCell.textContent = med.status || "N/A";
       timeCell.textContent = med.effectiveTimeDateTime || "Unknown";
     });
+
+    // Display full JSON response on screen
+    const pre = document.createElement('pre');
+    pre.style.border = "1px solid #ccc";
+    pre.style.background = "#f9f9f9";
+    pre.style.padding = "1em";
+    pre.style.marginTop = "2em";
+    pre.textContent = JSON.stringify(meds, null, 2);
+    //document.body.appendChild(pre);
+    //document.getElementById("med-admin-json").appendChild(pre);
+    document.getElementById("med-admin-json").textContent = JSON.stringify(meds, null, 2);
+    
   }).fail(function(error) {
     console.error("Failed to fetch MedicationAdministration data:", error);
   });
